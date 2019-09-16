@@ -2,7 +2,24 @@
 
 const fs = require("fs");
 const chalk = require("chalk");
-const filename = process.argv[2];
+const argv = require("yargs").argv;
+const filesize = require("filesize");
+const filename = `${argv._[0]}`;
+const format = argv.format || "KB";
+
+const formatOptions = {
+  mb: {
+    exponent: 1
+  },
+
+  kb: {
+    exponent: 0
+  },
+
+  b: {
+    exponent: -1
+  }
+};
 
 if (!filename) {
   const errorMessage = `${chalk.bgRed.white("Error:")}  \`${chalk.green(
@@ -19,5 +36,10 @@ fs.stat(filename, (err, stats) => {
     process.stderr.write(errorMessage);
     process.exit(1);
   }
-  process.stdout.write(`${stats.size}`);
+
+  const formatted = filesize(stats.size, {
+    output: "object",
+    ...
+  });
+  process.stdout.write(`${formatted.value}`);
 });

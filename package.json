@@ -12,7 +12,10 @@
   "author": "Rastopyr <rastopyr@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "chalk": "^2.4.2"
+    "chalk": "^2.4.2",
+    "file-size": "^1.0.0",
+    "filesize": "^4.2.0",
+    "yargs": "^14.0.0"
   },
   "devDependencies": {
     "jest": "^24.9.0"
