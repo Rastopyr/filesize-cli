@@ -1,0 +1,20 @@
+{
+  "name": "fsz-cli",
+  "version": "0.1.0",
+  "description": "CLI tool for get filesize value",
+  "bin": {
+    "fsz": "./bin.js"
+  },
+  "scripts": {
+    "fsz": "./bin.js"
+  },
+  "repository": "https://github.com/Rastopyr/filesize-cli.git",
+  "author": "Rastopyr <rastopyr@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.2"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}
