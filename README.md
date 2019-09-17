@@ -1,5 +1,7 @@
 # fsz-cli
 
+[![Build Status](https://travis-ci.org/Rastopyr/filesize-cli.svg?branch=master)](https://travis-ci.org/Rastopyr/filesize-cli)
+
 Small CLI wrapper for filesize npm package
 
 ## Usage
