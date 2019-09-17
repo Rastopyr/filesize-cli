@@ -21,5 +21,5 @@ Small CLI wrapper for filesize npm package
 0 # size in gb is zero because default round is 2
 
 > fsz 2mb.file --format gb --round 4
-0 # size in gb is zero because default round is 2
+0.0004 # size in gb rounded to 4
 ```
