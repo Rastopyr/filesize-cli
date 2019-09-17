@@ -1,6 +1,7 @@
 # fsz-cli
 
 [![Build Status](https://travis-ci.org/Rastopyr/filesize-cli.svg?branch=master)](https://travis-ci.org/Rastopyr/filesize-cli)
+[![Coverage Status](https://coveralls.io/repos/github/Rastopyr/filesize-cli/badge.svg?branch=master)](https://coveralls.io/github/Rastopyr/filesize-cli?branch=master)
 
 Small CLI wrapper for filesize npm package
 
