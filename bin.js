@@ -5,19 +5,23 @@ const chalk = require("chalk");
 const argv = require("yargs").argv;
 const filesize = require("filesize");
 const filename = `${argv._[0]}`;
-const format = argv.format || "KB";
+const format = (argv.format && argv.format.toLowerCase()) || "b";
+const round = (argv.round && Number(argv.round)) || 2;
 
 const formatOptions = {
-  mb: {
+  b: {
+    exponent: 0
+  },
+  kb: {
     exponent: 1
   },
 
-  kb: {
-    exponent: 0
+  mb: {
+    exponent: 2
   },
 
-  b: {
-    exponent: -1
+  gb: {
+    exponent: 3
   }
 };
 
@@ -39,7 +43,9 @@ fs.stat(filename, (err, stats) => {
 
   const formatted = filesize(stats.size, {
     output: "object",
-    ...
+    round,
+    ...formatOptions[format]
   });
+
   process.stdout.write(`${formatted.value}`);
 });
