@@ -1,51 +1,34 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
 const chalk = require("chalk");
-const argv = require("yargs").argv;
-const filesize = require("filesize");
+const yargs = require('yargs');
+
+const readFileSize = require('.');
+
+const { argv } = yargs;
 const filename = `${argv._[0]}`;
 const format = (argv.format && argv.format.toLowerCase()) || "b";
 const round = (argv.round && Number(argv.round)) || 2;
 
-const formatOptions = {
-  b: {
-    exponent: 0
-  },
-  kb: {
-    exponent: 1
-  },
+const errorMessage = (messageText) => `${chalk.bgRed.white("Error:")} ${messageText}`;
 
-  mb: {
-    exponent: 2
-  },
-
-  gb: {
-    exponent: 3
-  }
+const exitWithError = (error, code = 1) => {
+  process.stderr.write(error);
+  process.exit(code);
 };
 
 if (!filename) {
-  const errorMessage = `${chalk.bgRed.white("Error:")}  \`${chalk.green(
-    "filename"
-  )}\` argument is required`;
-
-  process.stderr.write(errorMessage);
-  process.exit(1);
+  exitWithError(
+    errorMessage(`\`${chalk.black("filename")}\` argument is required`)
+  )
 }
 
-fs.stat(filename, (err, stats) => {
-  if (err) {
-    const errorMessage = `${chalk.bgRed.white("Error:")} ${err.message}`;
-    process.stderr.write(errorMessage);
-    process.exit(1);
-  }
 
-  const formatted = filesize(stats.size, {
-    output: "object",
-    round,
-    ...formatOptions[format]
+readFileSize({filename, format, round})
+  .then((formattedValue) => {
+     process.stdout.write(`${formattedValue}`);
+  }).catch((err) => {
+    exitWithError(
+      errorMessage(err.message)
+    )
   });
-
-  process.stdout.write(`${formatted.value}`);
-});
