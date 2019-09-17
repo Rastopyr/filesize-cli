@@ -6,7 +6,7 @@
     "fsz": "./bin.js"
   },
   "scripts": {
-    "fsz": "./bin.js"
+    "test": "jest"
   },
   "repository": "https://github.com/Rastopyr/filesize-cli.git",
   "author": "Rastopyr <rastopyr@gmail.com>",

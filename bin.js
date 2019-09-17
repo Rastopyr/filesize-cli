@@ -23,7 +23,6 @@ if (!filename) {
   )
 }
 
-
 readFileSize({filename, format, round})
   .then((formattedValue) => {
      process.stdout.write(`${formattedValue}`);
