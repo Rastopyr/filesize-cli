@@ -1,6 +1,8 @@
 const fs = require("fs");
 const child_process = require("child_process");
 
+const fsz = require('.');
+
 // https://stackoverflow.com/questions/49433241/creating-an-empty-file-of-a-certain-size
 const createEmptyFileOfSize = (fileName, size) => {
   return new Promise((resolve, reject) => {
@@ -25,6 +27,55 @@ const createEmptyFileOfSize = (fileName, size) => {
 };
 
 describe("FSZ", () => {
+  describe("use as library", () => {
+    describe("default behavior", () => {
+      beforeAll(() => createEmptyFileOfSize("file.test", 30));
+
+      afterAll(done => {
+        fs.unlink("file.test", done);
+      });
+
+      it("should fail on empty size", () => {
+         return fsz(
+           {
+             filename: "test.file"
+           }
+         ).catch((err) => {
+           expect(err.message).toEqual(
+             `ENOENT: no such file or directory, stat 'test.file'`
+           );
+         });
+      });
+
+      it("should return size of test file", () => {
+          return fsz({
+          filename: "file.test"
+        }, (value) => {
+          expect(value).toEqual(30);
+        });
+      });
+    });
+
+    describe("format behavior", () => {
+      describe("bytes", () => {
+        beforeAll(() => createEmptyFileOfSize("file.test", 30));
+
+        afterAll(done => {
+          fs.unlink("file.test", done);
+        });
+
+        it("should return formatted size in bytes", () => {
+          return fsz({
+            filename: "file.test",
+            format: "b"
+          }).then((value) => {
+             expect(value).toEqual(30);
+          });
+        });
+      });
+    });
+  });
+
   describe("default behavior", () => {
     beforeAll(() => createEmptyFileOfSize("file.test", 30));
 
