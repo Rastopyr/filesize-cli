@@ -71,6 +71,7 @@ describe("FSZ", () => {
           "./bin.js",
           ["file.test", "--format", "b"],
           (err, stdout, stderr) => {
+            if (err || stderr) return done(err || stderr);
             expect(stdout).toEqual("30");
             done();
           }
@@ -90,6 +91,7 @@ describe("FSZ", () => {
           "./bin.js",
           ["file.test", "--format", "kb"],
           (err, stdout, stderr) => {
+            if (err || stderr) return done(err || stderr);
             expect(stdout).toEqual("3");
             done();
           }
@@ -109,6 +111,7 @@ describe("FSZ", () => {
           "./bin.js",
           ["file.test", "--format", "mb"],
           (err, stdout, stderr) => {
+            if (err || stderr) return done(err || stderr);
             expect(stdout).toEqual("3");
             done();
           }
@@ -128,6 +131,7 @@ describe("FSZ", () => {
           "./bin.js",
           ["file.test", "--format", "gb"],
           (err, stdout, stderr) => {
+            if (err || stderr) return done(err || stderr);
             expect(stdout).toEqual("0.05");
             done();
           }
@@ -148,6 +152,7 @@ describe("FSZ", () => {
         "./bin.js",
         ["file.test", "--format", "gb", "--round", "3"],
         (err, stdout, stderr) => {
+          if (err || stderr) return done(err || stderr);
           expect(stdout).toEqual("0.003");
           done();
         }

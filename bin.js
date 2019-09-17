@@ -1,14 +1,7 @@
 #!/usr/bin/env node
 
 const chalk = require("chalk");
-const yargs = require('yargs');
-
 const readFileSize = require('.');
-
-const { argv } = yargs;
-const filename = `${argv._[0]}`;
-const format = (argv.format && argv.format.toLowerCase()) || "b";
-const round = (argv.round && Number(argv.round)) || 2;
 
 const errorMessage = (messageText) => `${chalk.bgRed.white("Error:")} ${messageText}`;
 
@@ -17,17 +10,48 @@ const exitWithError = (error, code = 1) => {
   process.exit(code);
 };
 
-if (!filename) {
-  exitWithError(
-    errorMessage(`\`${chalk.black("filename")}\` argument is required`)
-  )
-}
+require('yargs')
+  .config({
+    format: "b",
+    round: 2
+  })
+  .usage('$0 <filePath>', 'show the size of `filePath` file', (yargs) => {
+      yargs.positional('filePath', {
+        describe: 'path to any file',
+        type: 'string'
+      });
+  }, (argv) => {
+    readFileSize({
+      filename: argv.filePath,
+      format: argv.format,
+      round: argv.round
+    })
+      .then((formattedValue) => {
+         process.stdout.write(`${formattedValue}`);
+      }).catch((err) => {
+        exitWithError(
+          errorMessage(err.message)
+        )
+      });
+  })
+  .option('format', {
+    alias: 'f',
+    describe: 'format unit of size',
+    choices: ['b', 'kb', 'mb', 'gb'],
+    type: 'string'
+  })
+  .option('round', {
+    alias: 'r',
+    describe: 'decimal place of file size',
+    type: 'number'
+  })
+  .help()
+  .argv
 
-readFileSize({filename, format, round})
-  .then((formattedValue) => {
-     process.stdout.write(`${formattedValue}`);
-  }).catch((err) => {
-    exitWithError(
-      errorMessage(err.message)
-    )
-  });
+// if (!filename) {
+//   exitWithError(
+//     errorMessage(`\`${chalk.black("filename")}\` argument is required`)
+//   )
+// }
+
+
