@@ -14,7 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2",
-    "filesize": "^4.2.0",
+    "filesize": "^10.0.7",
     "yargs": "^14.0.0"
   },
   "devDependencies": {
