@@ -1138,10 +1138,10 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-filesize@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/filesize/-/filesize-4.2.0.tgz#a8c989a179ca3a895cc32eab4abc64ebf6d34d44"
-  integrity sha512-bdS2UP98MZzLyTZzhuSH5ctAWyDt81n5xMti9BSdmgPXjjENLDz5Bmbk2R7ATVw/HRysZzWA2JIPgcSAOimWpw==
+filesize@^10.0.8:
+  version "10.0.8"
+  resolved "https://registry.yarnpkg.com/filesize/-/filesize-10.0.8.tgz#3091e0db2ab836dcd704f7b65d278519ef634457"
+  integrity sha512-/ylBrxZ1GAjgh2CEemKKLwTtmXfWqTtN1jRl6iqLwnMEucUX5cmaCCUPGstQOHVCcK9uYL6o1cPNakLQU2sasQ==
 
 fill-range@^4.0.0:
   version "4.0.0"
